@@ -1,0 +1,26 @@
+{
+  "welcome": "Bienvenue sur LocalKit",
+  "user": {
+    "name": "Nom",
+    "email": "Email",
+    "password": "Mot de passe"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "projects": "Projets",
+    "settings": "Paramètres",
+    "logout": "Déconnexion"
+  },
+  "messages": {
+    "greeting": "Bonjour {{name}} !",
+    "item_count": "Vous avez {count} éléments",
+    "success": "Opération réussie",
+    "error": "Une erreur est survenue : %(error)s"
+  },
+  "actions": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "confirm": "Confirmer"
+  }
+}

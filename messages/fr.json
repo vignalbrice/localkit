@@ -1,0 +1,622 @@
+{
+  "header": {
+    "title": "LocalKit i18next Editor",
+    "subtitle": "Importez, éditez et gérez vos traductions i18next avec facilité 🚀"
+  },
+  "app": {
+    "title": "LocalKit",
+    "subtitle": "Gestion de traduction simplifiée"
+  },
+  "metadata": {
+    "title": "LocalKit - Gestion des traductions",
+    "description": "Gérez vos traductions i18next facilement. Importez, éditez et synchronisez vos traductions avec GitHub en toute simplicité."
+  },
+  "dashboard": {
+    "projectCreated": "Project crée",
+    "deleteProject": "Projet supprimé",
+    "deleteProjectConfirm": "Êtes-vous sûr de vouloir supprimer le projet \"{project}\" ? Cette action est irréversible.",
+    "errorDeleting": "Erreur lors de la suppression du projet",
+    "planLimitReached": "Vous avez atteint la limite de {limit} projets pour le forfait {plan}",
+    "freePlanBanner": "Vous êtes sur le forfait Gratuit",
+    "freePlanDescription": "Passez au forfait Pro pour des projets illimités, l'intégration GitHub et la collaboration d'équipe",
+    "proPlanBanner": "Vous êtes sur le forfait Pro",
+    "proPlanDescription": "Profitez de toutes les fonctionnalités Pro incluant des projets illimités, l'intégration GitHub et les fonctionnalités d'équipe",
+    "enterprisePlanBanner": "Vous êtes sur le forfait Entreprise",
+    "enterprisePlanDescription": "Accès complet à toutes les fonctionnalités incluant la collaboration d'équipe avancée, le support prioritaire et les intégrations personnalisées"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "accountTitle": "Compte",
+    "accountDescription": "Informations de votre compte et préférences",
+    "emailLabel": "Email",
+    "nameLabel": "Nom",
+    "plan": "Forfait",
+    "planFree": "Gratuit (Démo)",
+    "planPro": "Pro",
+    "planEnterprise": "Entreprise",
+    "currentPlan": "Plan actuel",
+    "changePlan": "Changer de plan",
+    "upgradeToPro": "Passer à Pro",
+    "demoMode": "Mode Démo",
+    "enterToken": "Veuillez saisir un jeton GitHub",
+    "back": "Retour",
+    "active": "Actif",
+    "repositories": "Dépôts",
+    "github": {
+      "title": "Intégration GitHub",
+      "description": "Connectez votre compte GitHub pour synchroniser les traductions via des Pull Requests",
+      "connected": "Application GitHub connectée",
+      "notConnected": "Non connecté",
+      "status": "Statut",
+      "installationId": "ID d'installation",
+      "permissions": "Permissions",
+      "connect": "Connecter l'application GitHub",
+      "disconnect": "Déconnecter l'application GitHub",
+      "tokenLabel": "Jeton d'accès personnel GitHub",
+      "tokenPlaceholder": "ghp_xxxxxxxxxxxxxxxxxxxx",
+      "requiredScopes": "Scopes requis : repo, workflow",
+      "howItWorksTitle": "Comment cela fonctionne",
+      "howItWorks1": "Connectez votre compte GitHub via l'application GitHub",
+      "howItWorks2": "Sélectionnez un dépôt pour chaque projet",
+      "howItWorks3": "Exportez les traductions comme Pull Request",
+      "howItWorks4": "Votre équipe revoit et fusionne les modifications",
+      "connectedSuccess": "Application GitHub connectée avec succès",
+      "disconnectedSuccess": "Application GitHub déconnectée",
+      "oauthDescription": "Cliquez sur le bouton ci-dessous pour autoriser l'accès à votre compte GitHub via OAuth. Vous pourrez ensuite connecter vos dépôts à vos projets.",
+      "connectFailed": "Échec de la connexion à GitHub",
+      "disconnectFailed": "Échec de la déconnexion de GitHub",
+      "planRequired": "Fonctionnalité réservée aux plans Pro et Entreprise",
+      "upgradeDescription": "L'intégration GitHub est disponible uniquement pour les plans Pro et Entreprise",
+      "benefit1": "Synchronisation automatique avec GitHub",
+      "benefit2": "Pull Requests automatiques",
+      "benefit3": "Collaboration avec votre équipe",
+      "upgradeToPro": "Passer au plan Pro"
+    },
+    "api": {
+      "title": "Clés API",
+      "description": "Générez des clés API pour l'accès programmatique (fonctionnalité SaaS)",
+      "comingSoon": "Bientôt disponible",
+      "apiAccessDescription": "L'accès API sera disponible dans la version SaaS complète"
+    },
+    "dataManagement": {
+      "title": "Gestion des données",
+      "description": "Gérez vos données locales",
+      "clearAll": "Supprimer toutes les données",
+      "clearConfirm": "Êtes-vous sûr ?",
+      "cleared": "Toutes les données ont été supprimées",
+      "clearNote": "Ceci supprimera tous les projets stockés localement. Cette action est irréversible."
+    },
+    "team": {
+      "title": "Gestion d'équipe",
+      "description": "Gérez les membres de votre équipe et les permissions",
+      "upgradeRequired": "La gestion d'équipe est disponible avec le plan Pro ou Entreprise",
+      "upgradeToPro": "Passer au plan Pro",
+      "inviteNewMember": "Inviter un nouveau membre",
+      "emailPlaceholder": "email@example.com",
+      "invite": "Inviter",
+      "currentMembers": "Membres actuels",
+      "members": "membres",
+      "roles": {
+        "owner": "Propriétaire",
+        "admin": "Administrateur",
+        "member": "Membre"
+      },
+      "invalidEmail": "Adresse email invalide",
+      "limitReached": "Limite de membres atteinte",
+      "limitReachedMessage": "Vous avez atteint la limite de membres pour votre plan",
+      "inviteFailed": "Échec de l'invitation",
+      "removeFailed": "Échec du retrait du membre",
+      "updateRoleFailed": "Échec de la mise à jour du rôle",
+      "removeConfirmTitle": "Retirer le membre",
+      "removeConfirmDescription": "Êtes-vous sûr de vouloir retirer ce membre de l'équipe ? Cette action est irréversible.",
+      "autoSyncEnabled": "Synchronisation automatique activée",
+      "autoSyncDescription": "Les modifications de traduction sont automatiquement synchronisées avec GitHub toutes les 30 minutes pour tous les membres de l'équipe."
+    }
+  },
+  "projects": {
+    "title": "Projets",
+    "subtitle": "Gérez vos projets de traduction",
+    "back": "Retour",
+    "languages": "langues",
+    "namespaces": "namespaces",
+    "keys": "clés",
+    "connectGithub": "Connecter GitHub",
+    "push": "Push",
+    "importMerge": "Import/Merge",
+    "exportZip": "Export ZIP",
+    "languagesLabel": "Langues",
+    "addLanguage": "Ajouter une langue",
+    "addLanguageTitle": "Ajouter une langue",
+    "addLanguageDescription": "Ajoutez une nouvelle langue à ce projet",
+    "languagePlaceholder": "ex : en, fr, de",
+    "add": "Ajouter",
+    "noLanguages": "Aucune langue",
+    "namespaceLabel": "Namespace",
+    "addNamespace": "Ajouter un namespace",
+    "addNamespaceTitle": "Ajouter un namespace",
+    "addNamespaceDescription": "Ajoutez un nouveau namespace pour organiser vos traductions",
+    "namespacePlaceholder": "ex : common, auth, errors",
+    "allNamespaces": "Tous les namespaces",
+    "filterIssues": "Filtrer les problèmes",
+    "allKeys": "Toutes les clés",
+    "allIssues": "Tous les problèmes",
+    "missingTranslations": "Traductions manquantes",
+    "placeholderIssues": "Problèmes de placeholder",
+    "searchPlaceholder": "Rechercher...",
+    "addKey": "Ajouter une clé",
+    "addKeyTitle": "Ajouter une clé de traduction",
+    "addKeyDescription": "Créer une nouvelle clé pour toutes les langues",
+    "keyPlaceholder": "ex : auth.login.title",
+    "keyWillBeCreated": "La clé sera créée vide pour les {count} langue(s)",
+    "addLanguagesToStart": "Ajoutez des langues pour commencer à éditer les traductions",
+    "noKeys": "Aucune clé de traduction. Ajoutez votre première clé pour commencer.",
+    "totalKeys": "Clés totales",
+    "complete": "Complètes",
+    "missingTranslationsCount": "Traductions manquantes",
+    "onPossible": "sur {count} possibles",
+    "placeholderProblems": "Problèmes de placeholder",
+    "repository": "Dépôt",
+    "branch": "Branche",
+    "files": "Fichiers",
+    "importZip": "Importer ZIP",
+    "importing": "Importation...",
+    "importJson": "Importer JSON",
+    "newProject": "Nouveau projet",
+    "createProject": "Créer un projet",
+    "noProjectsTitle": "Pas encore de projets",
+    "noProjectsDescription": "Créez un nouveau projet ou importez des traductions depuis un fichier ZIP ou JSON pour commencer",
+    "importedSummary": "Projet importé avec {languageCount} langues et {namespaceCount} namespaces",
+    "languageExists": "La langue existe déjà",
+    "namespaceExists": "Le namespace existe déjà",
+    "enterKey": "Veuillez entrer une clé",
+    "languageAdded": "Langue \"{language}\" ajoutée !",
+    "languageAddedFirst": "Langue \"{language}\" ajoutée ! Vous pouvez maintenant ajouter des clés de traduction.",
+    "languageAddedWithKeys": "Langue \"{language}\" ajoutée avec {count} clé(s)",
+    "namespaceAdded": "Namespace \"{namespace}\" ajouté",
+    "keyAdded": "Clé \"{key}\" ajoutée au namespace \"{namespace}\"",
+    "errorAddingLanguage": "Erreur lors de l'ajout de la langue",
+    "errorAddingKey": "Erreur lors de l'ajout de la clé",
+    "errorSaving": "Erreur lors de la sauvegarde",
+    "errorDeleting": "Erreur lors de la suppression",
+    "deleteLanguageConfirm": "Supprimer la langue \"{language}\" et toutes ses traductions ?",
+    "languageDeleted": "Langue \"{language}\" supprimée",
+    "deleteKeyConfirm": "Supprimer la clé \"{key}\" du namespace \"{namespace}\" pour toutes les langues ?",
+    "keyDeleted": "Clé \"{key}\" supprimée",
+    "importSuccess": "Traductions fusionnées avec succès",
+    "importFailed": "Échec de l'import",
+    "importFailedWithError": "Échec de l'import: {error}",
+    "github": {
+      "enterRepo": "Veuillez entrer un dépôt",
+      "connectedSuccess": "GitHub connecté avec succès",
+      "connectFailed": "Échec de la connexion GitHub",
+      "connectFailedWithError": "Échec de la connexion GitHub: {error}",
+      "disconnectConfirm": "Êtes-vous sûr de vouloir déconnecter GitHub ?",
+      "disconnected": "GitHub déconnecté",
+      "disconnectFailed": "Échec de la déconnexion GitHub",
+      "disconnectFailedWithError": "Échec de la déconnexion GitHub: {error}",
+      "needAuth": "Vous devez d'abord autoriser l'accès à votre compte GitHub",
+      "errorLoadingRepos": "Erreur lors du chargement des dépôts",
+      "errorLoadingBranches": "Erreur lors du chargement des branches",
+      "notConnected": "Aucun dépôt GitHub connecté",
+      "commitMessageRequired": "Veuillez entrer un message de commit",
+      "prCreated": "Pull Request créée avec succès",
+      "viewPr": "Voir la PR",
+      "pushedSuccessfully": "Modifications envoyées avec succès",
+      "viewCommit": "Voir le commit",
+      "pushFailed": "Échec de l'envoi vers GitHub",
+      "pushFailedWithError": "Échec de l'envoi vers GitHub: {error}",
+      "pushToGithub": "Envoyer vers GitHub",
+      "pushDialogTitle": "Envoyer les traductions vers GitHub",
+      "pushDialogDescription": "Choisissez comment envoyer vos modifications vers le dépôt GitHub",
+      "commitMessageLabel": "Message de commit",
+      "commitMessagePlaceholder": "ex: Mise à jour des traductions",
+      "directPush": "Push direct",
+      "createPR": "Créer une Pull Request",
+      "pushing": "Envoi en cours..."
+    }
+  },
+  "actions": {
+    "confirm": "Confirmer",
+    "cancel": "Annuler",
+    "signOut": "Se déconnecter"
+  },
+  "common": {
+    "cancel": "Annuler",
+    "remove": "Retirer"
+  },
+  "import": {
+    "title": "Importer un JSON i18next",
+    "description": "Importez un fichier JSON pour une locale et un namespace spécifiques",
+    "locale": "Locale",
+    "localePlaceholder": "ex: en, fr, es",
+    "localeHelp": "Code de langue (ISO 639-1)",
+    "namespace": "Namespace",
+    "namespacePlaceholder": "ex: common, home, auth",
+    "namespaceHelp": "Catégorie de traductions",
+    "jsonFile": "Fichier JSON",
+    "importing": "Import...",
+    "import": "Importer"
+  },
+  "zipImport": {
+    "title": "Importer un ZIP (Détection automatique)",
+    "description": "Importez plusieurs fichiers à la fois, locale et namespace détectés automatiquement",
+    "preview": "Prévisualiser",
+    "importMode": "Mode d'import",
+    "mergeSafe": "🔄 Merge (Fusion - Recommandé)",
+    "mergeDescription": "Ajoute et met à jour les clés, conserve les clés existantes non présentes dans le ZIP",
+    "replace": "⚠️ Replace (Remplacement)",
+    "replaceDescription": "Le ZIP devient la source de vérité. Supprime les clés de la DB non présentes dans le ZIP pour les paires locale+namespace affectées",
+    "dropZip": "Déposez un fichier .zip ici"
+  },
+  "filter": {
+    "title": "Édition et filtres",
+    "description": "Recherchez, filtrez et éditez vos traductions",
+    "searchPlaceholder": "🔍 Rechercher une clé (ex: home.title)",
+    "exportZip": "📦 Exporter ZIP",
+    "missingOnly": "🚫 Clés manquantes uniquement",
+    "placeholderIssues": "⚠️ Problèmes de placeholders",
+    "locales": "🌍 Locales",
+    "rowsDisplayed": "📊 Lignes affichées",
+    "none": "Aucune"
+  },
+  "table": {
+    "key": "🔑 Clé",
+    "issues": "⚠️ Problèmes",
+    "missing": "Manquant",
+    "missingKeys": "Clés manquantes",
+    "placeholderDiff": "Différences placeholders",
+    "rename": "✏️ Renommer",
+    "delete": "🗑️ Supprimer",
+    "save": "💾",
+    "placeholderMissing": "❌ Manquant",
+    "expected": "Attendu",
+    "got": "Reçu",
+    "deleteConfirm": "Supprimer la clé {namespace}.{dotKey} pour TOUTES les locales ?",
+    "updatedOn": "Mis à jour"
+  },
+  "errors": {
+    "createProject": "Échec de création du projet",
+    "deleteProject": "Échec de suppression du projet",
+    "importZip": "Échec de l'import ZIP",
+    "importJson": "Échec de l'import JSON",
+    "fillAllFields": "Veuillez remplir tous les champs requis",
+    "unknown": "Erreur inconnue",
+    "loginFailed": "Échec de la connexion",
+    "invalidCredentials": "Email ou mot de passe incorrect",
+    "connectionError": "Une erreur est survenue lors de la connexion"
+  },
+  "login": {
+    "title": "Connexion",
+    "email": "Email",
+    "emailPlaceholder": "votre-email@exemple.fr",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Entrez votre mot de passe",
+    "loginButton": "Se connecter",
+    "loggingIn": "Connexion en cours...",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "signUp": "S'inscrire",
+    "successMessage": "Connexion réussie !"
+  },
+  "signup": {
+    "title": "Inscription",
+    "subtitle": "Créez votre compte LocalKit en quelques secondes",
+    "name": "Nom",
+    "namePlaceholder": "Votre nom",
+    "email": "Email",
+    "emailPlaceholder": "vous@exemple.com",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "••••••••",
+    "createAccount": "Créer un compte",
+    "alreadyHaveAccount": "Déjà un compte ?",
+    "login": "Se connecter"
+  },
+  "billing": {
+    "title": "Choisissez votre plan",
+    "subtitle": "Des solutions adaptées à tous vos besoins de gestion de traductions",
+    "backToProjects": "Retour aux projets",
+    "currentPlan": "Actuel",
+    "selectPlan": "Sélectionner",
+    "upgrading": "Mise à niveau...",
+    "popularBadge": "Plus Populaire",
+    "perMonth": "/mois",
+    "planFree": "Gratuit",
+    "planPro": "Pro",
+    "planEnterprise": "Entreprise",
+    "planFreeDescription": "Pour découvrir et tester",
+    "planProDescription": "Pour les équipes en croissance",
+    "planEnterpriseDescription": "Pour les grandes organisations",
+    "planSuccessMessage": "Plan {plan} activé avec succès ! 🎉",
+    "planChangeError": "Impossible de changer de plan. Veuillez réessayer.",
+    "loadPlanError": "Impossible de charger votre plan actuel",
+    "features": {
+      "projects": "projets",
+      "unlimited": "illimités",
+      "languages": "langues",
+      "keys": "clés de traduction",
+      "importExport": "Import/Export ZIP et JSON",
+      "githubIntegration": "Intégration GitHub",
+      "teamCollaboration": "Collaboration équipe",
+      "autoSync": "Synchronisation auto",
+      "prioritySupport": "Support prioritaire",
+      "members": "membres",
+      "unlimitedMembers": "Membres illimités",
+      "rolesPermissions": "Gestion des rôles et permissions",
+      "dedicatedApi": "API dédiée",
+      "slaGuarantee": "SLA garanti 99.9%",
+      "support24": "Support dédié 24/7",
+      "allProFeatures": "Tout du plan Pro"
+    },
+    "featureDetails": {
+      "teamCollaborationTitle": "Collaboration d'équipe",
+      "teamCollaborationDescription": "Invitez des membres à collaborer sur vos projets de traduction",
+      "autoSyncTitle": "Synchronisation automatique GitHub",
+      "autoSyncDescription": "Synchronisez automatiquement vos traductions vers GitHub à intervalles réguliers",
+      "prioritySupportTitle": "Support prioritaire",
+      "prioritySupportDescription": "Obtenez de l'aide rapidement avec notre système de support",
+      "rolesPermissionsTitle": "Gestion des rôles et permissions",
+      "rolesPermissionsDescription": "Contrôlez finement qui peut faire quoi dans vos projets",
+      "dedicatedApiTitle": "API dédiée",
+      "dedicatedApiDescription": "Accédez à vos traductions de manière programmatique",
+      "slaGuaranteeTitle": "SLA garanti 99.9%",
+      "slaGuaranteeDescription": "Garantie de disponibilité du service"
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "changePlan": "Puis-je changer de plan à tout moment ?",
+      "changePlanAnswer": "Oui, vous pouvez passer à un plan supérieur ou inférieur à tout moment. Les changements prennent effet immédiatement.",
+      "exceedLimits": "Que se passe-t-il si je dépasse les limites de mon plan ?",
+      "exceedLimitsAnswer": "Vous serez notifié lorsque vous approchez des limites. Pour continuer à utiliser le service, vous devrez passer à un plan supérieur.",
+      "dataOnDowngrade": "Qu'advient-il de mes données si je rétrograde ?",
+      "dataOnDowngradeAnswer": "Vos données sont conservées. Cependant, vous devrez vous adapter aux limites du nouveau plan.",
+      "freeTrial": "Y a-t-il une période d'essai gratuite pour les plans payants ?",
+      "freeTrialAnswer": "Oui, nous offrons 14 jours d'essai gratuit sur les plans Pro et Entreprise. Aucune carte bancaire requise."
+    },
+    "planDetails": {
+      "popular": "Populaire",
+      "upTo": "Jusqu'à",
+      "featuresTitle": "Fonctionnalités des plans",
+      "notAvailable": "Non disponible",
+      "basicRoles": "Rôles basiques",
+      "advancedManagement": "Gestion avancée",
+      "noGuarantee": "Aucune garantie",
+      "bestEffort": "Best effort",
+      "guaranteed": "garanti",
+      "manualSyncOnly": "Synchronisation manuelle uniquement",
+      "autoSyncEnabled": "Auto-sync activée",
+      "autoSyncPriority": "Auto-sync + Priorité",
+      "responseIn48h": "Réponse sous 48h",
+      "responseIn4h": "Réponse sous 4h",
+      "responseIn1h": "Réponse sous 1h • 24/7",
+      "enterpriseFeatures": "Fonctionnalités Entreprise :",
+      "customRoles": "Rôles personnalisés",
+      "granularPermissions": "Permissions granulaires",
+      "actionAudit": "Audit des actions",
+      "apiFeatures": "Fonctionnalités API :",
+      "crudEndpoints": "Endpoints CRUD complets",
+      "customWebhooks": "Webhooks personnalisés",
+      "adaptedRateLimiting": "Rate limiting adapté",
+      "slaIncludes": "Inclus dans le SLA :",
+      "uptime247": "Uptime monitoring 24/7",
+      "downtimeCompensation": "Compensation en cas de downtime",
+      "dedicatedTechSupport": "Support technique dédié"
+    }
+  },
+  "rename": {
+    "title": "✏️ Renommer la clé",
+    "namespace": "Namespace",
+    "oldKey": "Ancienne clé",
+    "newKey": "Nouvelle clé (dotKey)",
+    "newKeyPlaceholder": "ex: menu.file",
+    "onConflict": "En cas de conflit:",
+    "errorSafe": "🛡️ Erreur (Sécurisé)",
+    "errorDescription": "Empêche le renommage si la clé existe déjà",
+    "overwrite": "⚠️ Écraser",
+    "overwriteDescription": "Remplace la clé existante si elle existe",
+    "cancel": "Annuler",
+    "rename": "Renommer"
+  },
+  "preview": {
+    "title": "📋 Prévisualisation de l'import",
+    "locales": "🌍 Locales",
+    "namespaces": "📦 Namespaces",
+    "files": "📄 Fichiers",
+    "keys": "🔑 Clés",
+    "nonStringValues": "⚠️ Non-string",
+    "skipped": "🚫 Ignorés",
+    "invalidJson": "❌ JSON invalides",
+    "diff": "🔄 Différences (Mode: {mode})",
+    "new": "➕ Nouvelles",
+    "updated": "✏️ Modifiées",
+    "unchanged": "= Inchangées",
+    "deleted": "🗑️ Supprimées",
+    "perPair": "Détails par locale/namespace ({count} paires)",
+    "incoming": "Entrants",
+    "existing": "Existants",
+    "detectedFiles": "📁 Fichiers détectés ({count})",
+    "path": "Chemin",
+    "warnings": "Avertissements",
+    "warningNonString": "⚠️ {count} valeurs non-string",
+    "skippedFiles": "⚠️ Fichiers ignorés ({count})",
+    "invalidJsonFiles": "❌ JSON invalides ({count})",
+    "cancel": "Annuler",
+    "confirmImport": "✓ Confirmer l'import",
+    "importing": "Import en cours...",
+    "zipNotFound": "Fichier ZIP introuvable (veuillez le sélectionner à nouveau)."
+  },
+  "loading": "Chargement...",
+  "landing": {
+    "nav": {
+      "features": "Fonctionnalités",
+      "testimonials": "Témoignages",
+      "pricing": "Tarifs",
+      "getStarted": "Commencer"
+    },
+    "hero": {
+      "title": "Gérez vos traductions i18next avec facilité",
+      "subtitle": "LocalKit est l'éditeur de traductions i18next ultime. Importez, éditez et exportez vos fichiers de traduction en quelques clics.",
+      "cta": "Commencer gratuitement",
+      "learnMore": "En savoir plus"
+    },
+    "features": {
+      "title": "Tout ce dont vous avez besoin pour gérer vos traductions",
+      "subtitle": "Des fonctionnalités puissantes pour rationaliser votre workflow de traduction",
+      "import": {
+        "title": "Import intelligent",
+        "description": "Importez vos fichiers JSON ou ZIP avec détection automatique de locale et namespace"
+      },
+      "edit": {
+        "title": "Édition en temps réel",
+        "description": "Éditez vos traductions avec un aperçu instantané et une détection d'erreurs"
+      },
+      "export": {
+        "title": "Export flexible",
+        "description": "Exportez vos traductions au format que vous souhaitez, prêtes pour la production"
+      },
+      "validation": {
+        "title": "Validation intelligente",
+        "description": "Détectez automatiquement les clés manquantes et les problèmes de placeholders"
+      },
+      "github": {
+        "title": "Intégration GitHub",
+        "description": "Synchronisez vos traductions avec GitHub via des Pull Requests automatiques"
+      },
+      "collaboration": {
+        "title": "Collaboration d'équipe",
+        "description": "Travaillez ensemble sur vos traductions avec la gestion des membres et des permissions"
+      },
+      "autoSync": {
+        "title": "Synchronisation automatique",
+        "description": "Synchronisation automatique de vos traductions avec GitHub toutes les 30 minutes"
+      },
+      "security": {
+        "title": "Sécurisé et privé",
+        "description": "Vos données sont stockées localement dans votre navigateur, rien n'est envoyé à nos serveurs"
+      }
+    },
+    "testimonials": {
+      "title": "Ce que disent nos utilisateurs",
+      "subtitle": "Découvrez comment LocalKit aide les équipes à gérer leurs traductions",
+      "testimonial1": {
+        "quote": "LocalKit a transformé notre workflow de traduction. La détection automatique des problèmes nous fait gagner des heures chaque semaine.",
+        "author": "Sarah Chen",
+        "role": "Lead Developer chez TechCorp"
+      },
+      "testimonial2": {
+        "quote": "L'intégration GitHub est parfaite. Nous pouvons maintenant gérer nos traductions directement via des Pull Requests.",
+        "author": "Marcus Johnson",
+        "role": "CTO chez StartupXYZ"
+      },
+      "testimonial3": {
+        "quote": "La meilleure partie ? Tout est stocké localement. Aucun souci de confidentialité avec nos traductions sensibles.",
+        "author": "Emma Wilson",
+        "role": "Product Manager chez FinanceApp"
+      }
+    },
+    "pricing": {
+      "title": "Tarification simple et transparente",
+      "subtitle": "Choisissez le plan qui correspond à vos besoins",
+      "monthly": "Mensuel",
+      "yearly": "Annuel",
+      "save20": "Économisez 20%",
+      "free": {
+        "name": "Gratuit",
+        "price": "0€",
+        "description": "Parfait pour les projets personnels et les petites équipes",
+        "cta": "Commencer gratuitement",
+        "feature1": "Jusqu'à 3 projets",
+        "feature2": "Stockage local illimité",
+        "feature3": "Import/Export JSON et ZIP",
+        "feature4": "Validation des traductions",
+        "feature5": "Support communautaire"
+      },
+      "pro": {
+        "name": "Pro",
+        "price": "29€",
+        "period": "/mois",
+        "description": "Pour les équipes professionnelles qui ont besoin de plus",
+        "cta": "Commencer l'essai gratuit",
+        "popular": "Populaire",
+        "feature1": "Projets illimités",
+        "feature2": "Intégration GitHub",
+        "feature3": "Synchronisation automatique",
+        "feature4": "Gestion d'équipe (jusqu'à 5 membres)",
+        "feature5": "Support prioritaire",
+        "feature6": "Historique des versions",
+        "feature7": "API access"
+      },
+      "enterprise": {
+        "name": "Entreprise",
+        "price": "Sur mesure",
+        "description": "Pour les grandes organisations avec des besoins spécifiques",
+        "cta": "Nous contacter",
+        "feature1": "Tout du plan Pro",
+        "feature2": "Membres d'équipe illimités",
+        "feature3": "SSO et authentification avancée",
+        "feature4": "Déploiement on-premise",
+        "feature5": "Support dédié 24/7",
+        "feature6": "SLA personnalisé",
+        "feature7": "Fonctionnalités sur mesure"
+      }
+    },
+    "cta": {
+      "title": "Prêt à simplifier vos traductions ?",
+      "subtitle": "Rejoignez des centaines d'équipes qui utilisent LocalKit pour gérer leurs traductions i18next",
+      "button": "Commencer gratuitement",
+      "noCard": "Aucune carte de crédit requise"
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "subtitle": "Tout ce que vous devez savoir sur LocalKit",
+      "q1": {
+        "question": "Mes données sont-elles sécurisées ?",
+        "answer": "Oui ! Par défaut, toutes vos données sont stockées localement dans votre navigateur. Rien n'est envoyé à nos serveurs sauf si vous activez explicitement l'intégration GitHub."
+      },
+      "q2": {
+        "question": "Puis-je utiliser LocalKit hors ligne ?",
+        "answer": "Absolument ! LocalKit fonctionne entièrement hors ligne pour les opérations locales. Vous n'avez besoin d'une connexion internet que pour les fonctionnalités GitHub."
+      },
+      "q3": {
+        "question": "Comment fonctionne l'intégration GitHub ?",
+        "answer": "LocalKit s'intègre à GitHub via OAuth. Une fois connecté, vous pouvez synchroniser vos traductions en créant automatiquement des Pull Requests ou en poussant directement vers une branche."
+      },
+      "q4": {
+        "question": "Puis-je importer mes traductions existantes ?",
+        "answer": "Oui ! LocalKit supporte l'import de fichiers JSON individuels ou de fichiers ZIP contenant plusieurs traductions. La détection de locale et namespace est automatique."
+      },
+      "q5": {
+        "question": "Quels formats de fichiers sont supportés ?",
+        "answer": "LocalKit supporte tous les fichiers JSON i18next standard. Vous pouvez importer/exporter des fichiers JSON individuels ou des archives ZIP contenant plusieurs fichiers."
+      }
+    },
+    "footer": {
+      "product": {
+        "title": "Produit",
+        "features": "Fonctionnalités",
+        "pricing": "Tarifs",
+        "documentation": "Documentation",
+        "changelog": "Notes de version"
+      },
+      "company": {
+        "title": "Entreprise",
+        "about": "À propos",
+        "blog": "Blog",
+        "careers": "Carrières",
+        "contact": "Contact"
+      },
+      "resources": {
+        "title": "Ressources",
+        "guides": "Guides",
+        "apiDocs": "Documentation API",
+        "community": "Communauté",
+        "support": "Support"
+      },
+      "legal": {
+        "title": "Légal",
+        "privacy": "Confidentialité",
+        "terms": "Conditions d'utilisation",
+        "security": "Sécurité"
+      },
+      "copyright": "© 2024 LocalKit. Tous droits réservés."
+    }
+  }
+}

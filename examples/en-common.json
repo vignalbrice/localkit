@@ -1,0 +1,26 @@
+{
+  "welcome": "Welcome to LocalKit",
+  "user": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password"
+  },
+  "navigation": {
+    "home": "Home",
+    "projects": "Projects",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "messages": {
+    "greeting": "Hello {{name}}!",
+    "item_count": "You have {count} items",
+    "success": "Operation completed successfully",
+    "error": "An error occurred: %(error)s"
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm": "Confirm"
+  }
+}

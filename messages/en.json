@@ -1,0 +1,623 @@
+{
+  "header": {
+    "title": "LocalKit i18next Editor",
+    "subtitle": "Import, edit and manage your i18next translations with ease 🚀"
+  },
+  "app": {
+    "title": "LocalKit",
+    "subtitle": "Translation management made simple"
+  },
+  "metadata": {
+    "title": "LocalKit - Translation Management",
+    "description": "Manage your i18next translations with ease. Import, edit, and sync your translations with GitHub seamlessly."
+  },
+  "dashboard": {
+    "projectCreated": "Project created",
+    "deleteProject": "Project deleted",
+    "deleteProjectConfirm": "Are you sure you want to delete the project \"{project}\"? This action cannot be undone.",
+    "errorDeleting": "Failed to delete project",
+    "planLimitReached": "You have reached the limit of {limit} projects for the {plan} plan",
+    "freePlanBanner": "You are on the Free plan",
+    "freePlanDescription": "Upgrade to Pro for unlimited projects, GitHub integration, and team collaboration",
+    "proPlanBanner": "You are on the Pro plan",
+    "proPlanDescription": "Enjoy all Pro features including unlimited projects, GitHub integration, and team features",
+    "enterprisePlanBanner": "You are on the Enterprise plan",
+    "enterprisePlanDescription": "Full access to all features including advanced team collaboration, priority support, and custom integrations"
+  },
+  "settings": {
+    "title": "Settings",
+    "accountTitle": "Account",
+    "accountDescription": "Your account information and preferences",
+    "emailLabel": "Email",
+    "nameLabel": "Name",
+    "plan": "Plan",
+    "planFree": "Free (Demo)",
+    "planPro": "Pro",
+    "planEnterprise": "Enterprise",
+    "currentPlan": "Current plan",
+    "changePlan": "Change plan",
+    "upgradeToPro": "Upgrade to Pro",
+    "demoMode": "Demo Mode",
+    "enterToken": "Please enter a GitHub token",
+    "back": "Back",
+    "active": "Active",
+    "repositories": "Repositories",
+    "github": {
+      "title": "GitHub Integration",
+      "description": "Connect your GitHub account to sync translations via Pull Requests",
+      "connected": "GitHub App Connected",
+      "notConnected": "Not Connected",
+      "status": "Status",
+      "installationId": "Installation ID",
+      "permissions": "Permissions",
+      "connect": "Connect GitHub App",
+      "disconnect": "Disconnect GitHub App",
+      "tokenLabel": "GitHub Personal Access Token",
+      "tokenPlaceholder": "ghp_xxxxxxxxxxxxxxxxxxxx",
+      "requiredScopes": "Required scopes: repo, workflow",
+      "howItWorksTitle": "How it works",
+      "howItWorks1": "Connect your GitHub account via the GitHub App",
+      "howItWorks2": "Select a repository for each project",
+      "howItWorks3": "Export translations directly as a Pull Request",
+      "howItWorks4": "Your team reviews and merges the changes",
+      "connectedSuccess": "GitHub App connected successfully",
+      "disconnectedSuccess": "GitHub App disconnected",
+      "oauthDescription": "Click the button below to authorize access to your GitHub account via OAuth. You will then be able to connect your repositories to your projects.",
+      "connectFailed": "Failed to connect to GitHub",
+      "disconnectFailed": "Failed to disconnect from GitHub",
+      "planRequired": "Feature available on Pro and Enterprise plans",
+      "upgradeDescription": "The GitHub integration is available only on Pro and Enterprise plans",
+      "benefit1": "Automatic sync with GitHub",
+      "benefit2": "Automatic Pull Requests",
+      "benefit3": "Collaborate with your team",
+      "upgradeToPro": "Upgrade to Pro"
+    },
+    "api": {
+      "title": "API Keys",
+      "description": "Generate API keys for programmatic access (SaaS feature)",
+      "comingSoon": "Coming Soon",
+      "apiAccessDescription": "API access will be available in the full SaaS version"
+    },
+    "dataManagement": {
+      "title": "Data Management",
+      "description": "Manage your local data",
+      "clearAll": "Clear All Data",
+      "clearConfirm": "Are you sure?",
+      "cleared": "All data cleared",
+      "clearNote": "This will delete all projects stored locally. This action cannot be undone."
+    },
+    "team": {
+      "title": "Team Management",
+      "description": "Manage your team members and permissions",
+      "upgradeRequired": "Team management is available on Pro or Enterprise plans",
+      "upgradeToPro": "Upgrade to Pro",
+      "inviteNewMember": "Invite a new member",
+      "emailPlaceholder": "email@example.com",
+      "invite": "Invite",
+      "currentMembers": "Current members",
+      "members": "members",
+      "roles": {
+        "owner": "Owner",
+        "admin": "Admin",
+        "member": "Member"
+      },
+      "invalidEmail": "Invalid email address",
+      "limitReached": "Member limit reached",
+      "limitReachedMessage": "You have reached the member limit for your plan",
+      "inviteFailed": "Failed to invite",
+      "removeFailed": "Failed to remove member",
+      "updateRoleFailed": "Failed to update role",
+      "removeConfirmTitle": "Remove member",
+      "removeConfirmDescription": "Are you sure you want to remove this member from the team? This action cannot be undone.",
+      "autoSyncEnabled": "Auto-sync enabled",
+      "autoSyncDescription": "Translation changes are automatically synced with GitHub every 30 minutes for all team members."
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Manage your translation projects",
+    "back": "Back",
+    "languages": "languages",
+    "namespaces": "namespaces",
+    "keys": "keys",
+    "connectGithub": "Connect GitHub",
+    "push": "Push",
+    "importMerge": "Import/Merge",
+    "exportZip": "Export ZIP",
+    "languagesLabel": "Languages",
+    "addLanguage": "Add language",
+    "addLanguageTitle": "Add a language",
+    "addLanguageDescription": "Add a new language to this project",
+    "languagePlaceholder": "e.g.: en, fr, de",
+    "add": "Add",
+    "noLanguages": "No languages",
+    "namespaceLabel": "Namespace",
+    "addNamespace": "Add namespace",
+    "addNamespaceTitle": "Add a namespace",
+    "addNamespaceDescription": "Add a new namespace to organize your translations",
+    "namespacePlaceholder": "e.g.: common, auth, errors",
+    "allNamespaces": "All namespaces",
+    "filterIssues": "Filter issues",
+    "allKeys": "All keys",
+    "allIssues": "All issues",
+    "missingTranslations": "Missing translations",
+    "placeholderIssues": "Placeholder issues",
+    "searchPlaceholder": "Search...",
+    "addKey": "Add a key",
+    "addKeyTitle": "Add a translation key",
+    "addKeyDescription": "Create a new key for all languages",
+    "keyPlaceholder": "e.g.: auth.login.title",
+    "keyWillBeCreated": "The key will be created empty for the {count} language(s)",
+    "addLanguagesToStart": "Add languages to start editing translations",
+    "noKeys": "No translation keys. Add your first key to get started.",
+    "totalKeys": "Total keys",
+    "complete": "Complete",
+    "missingTranslationsCount": "Missing translations",
+    "onPossible": "on {count} possible",
+    "placeholderProblems": "Placeholder problems",
+    "repository": "Repository",
+    "branch": "Branch",
+    "files": "Files",
+    "importZip": "Import ZIP",
+    "importing": "Importing...",
+    "importJson": "Import JSON",
+    "newProject": "New Project",
+    "createProject": "Create Project",
+    "noProjectsTitle": "No projects yet",
+    "noProjectsDescription": "Create a new project or import translations from a ZIP or JSON file to get started",
+    "importedSummary": "Project imported with {languageCount} languages and {namespaceCount} namespaces",
+    "languageExists": "Language already exists",
+    "namespaceExists": "Namespace already exists",
+    "enterKey": "Please enter a key",
+    "languageAdded": "Language \"{language}\" added!",
+    "languageAddedFirst": "Language \"{language}\" added! You can now add translation keys.",
+    "languageAddedWithKeys": "Language \"{language}\" added with {count} key(s)",
+    "namespaceAdded": "Namespace \"{namespace}\" added",
+    "keyAdded": "Key \"{key}\" added to namespace \"{namespace}\"",
+    "errorAddingLanguage": "Error adding language",
+    "errorAddingKey": "Error adding key",
+    "errorSaving": "Error saving",
+    "errorDeleting": "Error deleting",
+    "deleteLanguageConfirm": "Delete language \"{language}\" and all its translations?",
+    "languageDeleted": "Language \"{language}\" deleted",
+    "deleteKeyConfirm": "Delete key \"{key}\" from namespace \"{namespace}\" for all languages?",
+    "keyDeleted": "Key \"{key}\" deleted",
+    "importSuccess": "Translations merged successfully",
+    "importFailed": "Import failed",
+    "importFailedWithError": "Import failed: {error}",
+    "github": {
+      "enterRepo": "Please enter a repository",
+      "connectedSuccess": "GitHub connected successfully",
+      "connectFailed": "Failed to connect GitHub",
+      "connectFailedWithError": "Failed to connect GitHub: {error}",
+      "disconnectConfirm": "Are you sure you want to disconnect GitHub?",
+      "disconnected": "GitHub disconnected",
+      "disconnectFailed": "Failed to disconnect GitHub",
+      "disconnectFailedWithError": "Failed to disconnect GitHub: {error}",
+      "needAuth": "You must first authorize access to your GitHub account",
+      "errorLoadingRepos": "Error loading repositories",
+      "errorLoadingBranches": "Error loading branches",
+      "notConnected": "No GitHub repository connected",
+      "commitMessageRequired": "Please enter a commit message",
+      "prCreated": "Pull Request created successfully",
+      "viewPr": "View PR",
+      "pushedSuccessfully": "Changes pushed successfully",
+      "viewCommit": "View commit",
+      "pushFailed": "Failed to push to GitHub",
+      "pushFailedWithError": "Failed to push to GitHub: {error}",
+      "pushToGithub": "Push to GitHub",
+      "pushDialogTitle": "Push translations to GitHub",
+      "pushDialogDescription": "Choose how to push your changes to the GitHub repository",
+      "commitMessageLabel": "Commit message",
+      "commitMessagePlaceholder": "e.g.: Update translations",
+      "directPush": "Direct push",
+      "createPR": "Create Pull Request",
+      "pushing": "Pushing..."
+    }
+  },
+  "actions": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "signOut": "Sign out"
+  },
+  "import": {
+    "title": "Import i18next JSON",
+    "description": "Import a JSON file for a specific locale and namespace",
+    "locale": "Locale",
+    "localePlaceholder": "e.g.: en, fr, es",
+    "localeHelp": "Language code (ISO 639-1)",
+    "namespace": "Namespace",
+    "namespacePlaceholder": "e.g.: common, home, auth",
+    "namespaceHelp": "Translation category",
+    "jsonFile": "JSON File",
+    "importing": "Importing...",
+    "import": "Import"
+  },
+  "zipImport": {
+    "title": "Import ZIP (Auto-detection)",
+    "description": "Import multiple files at once, locale and namespace automatically detected",
+    "preview": "Preview",
+    "importMode": "Import mode",
+    "mergeSafe": "Merge (Safe)",
+    "mergeDescription": "Adds and updates keys, keeps existing keys not present in ZIP",
+    "replace": "Replace",
+    "replaceDescription": "ZIP becomes the source of truth. Deletes DB keys not present in ZIP for affected locale+namespace pairs",
+    "dropZip": "Drop a .zip file here"
+  },
+  "filter": {
+    "title": "Editing and filters",
+    "description": "Search, filter and edit your translations",
+    "searchPlaceholder": "🔍 Search for a key (e.g.: home.title)",
+    "exportZip": "Export ZIP",
+    "missingOnly": "Missing keys only",
+    "placeholderIssues": "Placeholder issues",
+    "locales": "Locales",
+    "rowsDisplayed": "Rows displayed",
+    "none": "None"
+  },
+  "table": {
+    "key": "Key",
+    "issues": "Issues",
+    "missing": "Missing",
+    "missingKeys": "Missing keys",
+    "placeholderDiff": "Placeholder differences",
+    "rename": "Rename",
+    "delete": "Delete",
+    "save": "Save",
+    "placeholderMissing": "Missing",
+    "expected": "Expected",
+    "got": "Got",
+    "deleteConfirm": "Delete key {namespace}.{dotKey} for ALL locales?",
+    "updatedOn": "Updated"
+  },
+  "errors": {
+    "createProject": "Failed to create project",
+    "deleteProject": "Failed to delete project",
+    "importZip": "Failed to import ZIP",
+    "importJson": "Failed to import JSON",
+    "fillAllFields": "Please fill all required fields",
+    "unknown": "Unknown error",
+    "loginFailed": "Login failed",
+    "invalidCredentials": "Invalid email or password",
+    "connectionError": "An error occurred during login"
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "emailPlaceholder": "your-email@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "loginButton": "Login",
+    "loggingIn": "Logging in...",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up",
+    "successMessage": "Login successful!"
+  },
+  "signup": {
+    "title": "Sign up",
+    "subtitle": "Create your LocalKit account in seconds",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "createAccount": "Create account",
+    "alreadyHaveAccount": "Already have an account?",
+    "login": "Login"
+  },
+  "billing": {
+    "title": "Choose your plan",
+    "subtitle": "Solutions tailored to all your translation management needs",
+    "backToProjects": "Back to projects",
+    "currentPlan": "Current",
+    "selectPlan": "Select plan",
+    "upgrading": "Upgrading...",
+    "popularBadge": "Most Popular",
+    "perMonth": "/month",
+    "planFree": "Free",
+    "planPro": "Pro",
+    "planEnterprise": "Enterprise",
+    "planFreeDescription": "To discover and test",
+    "planProDescription": "For growing teams",
+    "planEnterpriseDescription": "For large organizations",
+    "planSuccessMessage": "{plan} plan successfully activated! 🎉",
+    "planChangeError": "Unable to change plan. Please try again.",
+    "loadPlanError": "Unable to load your current plan",
+    "features": {
+      "projects": "projects",
+      "unlimited": "unlimited",
+      "languages": "languages",
+      "keys": "translation keys",
+      "importExport": "ZIP and JSON Import/Export",
+      "githubIntegration": "GitHub Integration",
+      "teamCollaboration": "Team collaboration",
+      "autoSync": "Auto sync",
+      "prioritySupport": "Priority support",
+      "members": "members",
+      "unlimitedMembers": "Unlimited members",
+      "rolesPermissions": "Role and permission management",
+      "dedicatedApi": "Dedicated API",
+      "slaGuarantee": "99.9% SLA guarantee",
+      "support24": "24/7 dedicated support",
+      "allProFeatures": "All Pro plan features"
+    },
+    "featureDetails": {
+      "teamCollaborationTitle": "Team collaboration",
+      "teamCollaborationDescription": "Invite members to collaborate on your translation projects",
+      "autoSyncTitle": "Automatic GitHub synchronization",
+      "autoSyncDescription": "Automatically sync your translations to GitHub at regular intervals",
+      "prioritySupportTitle": "Priority support",
+      "prioritySupportDescription": "Get help quickly with our support system",
+      "rolesPermissionsTitle": "Role and permission management",
+      "rolesPermissionsDescription": "Control precisely who can do what in your projects",
+      "dedicatedApiTitle": "Dedicated API",
+      "dedicatedApiDescription": "Access your translations programmatically",
+      "slaGuaranteeTitle": "99.9% SLA guarantee",
+      "slaGuaranteeDescription": "Service availability guarantee"
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "changePlan": "Can I change my plan at any time?",
+      "changePlanAnswer": "Yes, you can upgrade or downgrade at any time. Changes take effect immediately.",
+      "exceedLimits": "What happens if I exceed my plan limits?",
+      "exceedLimitsAnswer": "You will be notified when you approach limits. To continue using the service, you will need to upgrade to a higher plan.",
+      "dataOnDowngrade": "What happens to my data if I downgrade?",
+      "dataOnDowngradeAnswer": "Your data is preserved. However, you will need to adapt to the limits of the new plan.",
+      "freeTrial": "Is there a free trial for paid plans?",
+      "freeTrialAnswer": "Yes, we offer a 14-day free trial for Pro and Enterprise plans. No credit card required."
+    },
+    "planDetails": {
+      "popular": "Popular",
+      "upTo": "Up to",
+      "featuresTitle": "Plan features",
+      "notAvailable": "Not available",
+      "basicRoles": "Basic roles",
+      "advancedManagement": "Advanced management",
+      "noGuarantee": "No guarantee",
+      "bestEffort": "Best effort",
+      "guaranteed": "guaranteed",
+      "manualSyncOnly": "Manual sync only",
+      "autoSyncEnabled": "Auto-sync enabled",
+      "autoSyncPriority": "Auto-sync + Priority",
+      "responseIn48h": "Response within 48h",
+      "responseIn4h": "Response within 4h",
+      "responseIn1h": "Response within 1h • 24/7",
+      "enterpriseFeatures": "Enterprise features:",
+      "customRoles": "Custom roles",
+      "granularPermissions": "Granular permissions",
+      "actionAudit": "Action audit",
+      "apiFeatures": "API features:",
+      "crudEndpoints": "Complete CRUD endpoints",
+      "customWebhooks": "Custom webhooks",
+      "adaptedRateLimiting": "Adapted rate limiting",
+      "slaIncludes": "Included in SLA:",
+      "uptime247": "24/7 Uptime monitoring",
+      "downtimeCompensation": "Compensation in case of downtime",
+      "dedicatedTechSupport": "Dedicated technical support"
+    }
+  },
+  "rename": {
+    "title": "Rename key",
+    "namespace": "Namespace",
+    "oldKey": "Old key",
+    "newKey": "New key (dotKey)",
+    "newKeyPlaceholder": "e.g.: menu.file",
+    "onConflict": "On conflict:",
+    "errorSafe": "Error (Safe)",
+    "errorDescription": "Prevents renaming if the key already exists",
+    "overwrite": "Overwrite",
+    "overwriteDescription": "Replaces the existing key if it exists",
+    "cancel": "Cancel",
+    "rename": "Rename"
+  },
+  "preview": {
+    "title": "Import preview",
+    "locales": "Locales",
+    "namespaces": "Namespaces",
+    "files": "Files",
+    "keys": "Keys",
+    "nonStringValues": "Non-string values",
+    "skipped": "Skipped",
+    "invalidJson": "Invalid JSON",
+    "diff": "Differences (Mode: {mode})",
+    "new": "New",
+    "updated": "Updated",
+    "unchanged": "Unchanged",
+    "deleted": "Deleted",
+    "perPair": "Details per locale/namespace ({count} pairs)",
+    "incoming": "Incoming",
+    "existing": "Existing",
+    "detectedFiles": "Detected files ({count})",
+    "path": "Path",
+    "warnings": "Warnings",
+    "warningNonString": "⚠️ {count} non-string values",
+    "skippedFiles": "Skipped files ({count})",
+    "invalidJsonFiles": "Invalid JSON ({count})",
+    "cancel": "Cancel",
+    "confirmImport": "✓ Confirm import",
+    "importing": "Importing...",
+    "zipNotFound": "ZIP file not found (please select it again)."
+  },
+  "common": {
+    "cancel": "Cancel",
+    "remove": "Remove"
+  },
+  "landing": {
+    "nav": {
+      "features": "Features",
+      "testimonials": "Testimonials",
+      "pricing": "Pricing",
+      "getStarted": "Get Started"
+    },
+    "hero": {
+      "title": "Manage your i18next translations simply",
+      "subtitle": "LocalKit simplifies the management of your i18next translation files. Import, edit and sync your translations with GitHub in a few clicks.",
+      "cta": "Get Started",
+      "learnMore": "Learn more"
+    },
+    "features": {
+      "title": "Powerful features",
+      "subtitle": "Everything you need to manage your translations efficiently",
+      "importExport": {
+        "title": "ZIP Import and Export",
+        "description": "Easily import your existing translation files in ZIP format. Export them just as easily to integrate them into your projects.",
+        "learnMore": "Learn more →"
+      },
+      "tableEditing": {
+        "title": "Table editing",
+        "description": "View and edit all your translations in a clear and intuitive interface. Modify multiple languages simultaneously with our inline editor.",
+        "learnMore": "Learn more →"
+      },
+      "timeSaving": {
+        "title": "Time saving",
+        "description": "Drastically reduce the time spent managing your translation files"
+      },
+      "collaboration": {
+        "title": "Simplified collaboration",
+        "description": "Work as a team on your translations with a shared interface"
+      },
+      "quality": {
+        "title": "Guaranteed quality",
+        "description": "Automatically detect missing keys and inconsistencies"
+      },
+      "compatibility": {
+        "title": "Strict compatibility",
+        "description": "100% compatible with i18next and all popular frameworks"
+      },
+      "githubSync": {
+        "title": "GitHub sync",
+        "description": "Automatically sync your translations with GitHub"
+      },
+      "security": {
+        "title": "Assured security",
+        "description": "Your data is encrypted and stored securely"
+      }
+    },
+    "testimonials": {
+      "title": "User feedback",
+      "subtitle": "What our users think of LocalKit",
+      "testimonial1": {
+        "quote": "LocalKit has completely transformed the way we manage translations. The interface is intuitive and the GitHub integration is perfect.",
+        "author": "Sophie Laurent",
+        "role": "Lead Dev, TechCorp"
+      },
+      "testimonial2": {
+        "quote": "Inline editing and the missing keys system saved us considerable time. Essential for our team.",
+        "author": "Marc Dubois",
+        "role": "CTO, StartupXYZ"
+      },
+      "testimonial3": {
+        "quote": "Simple, efficient and perfectly integrated into our workflow. Our team couldn't do without it!",
+        "author": "Alice Martin",
+        "role": "PM, SaaS Inc"
+      }
+    },
+    "pricing": {
+      "title": "Simple and transparent pricing",
+      "subtitle": "Choose the plan that fits your needs",
+      "free": {
+        "name": "Free",
+        "price": "0€",
+        "period": "/month",
+        "features": {
+          "projects": "1 project",
+          "languages": "Up to 5 languages",
+          "keys": "1000 translation keys",
+          "importExport": "Import/Export ZIP",
+          "github": "GitHub integration"
+        },
+        "cta": "Start for free"
+      },
+      "pro": {
+        "name": "Pro",
+        "badge": "Popular",
+        "price": "19€",
+        "period": "/month",
+        "features": {
+          "projects": "Unlimited projects",
+          "languages": "Unlimited languages",
+          "keys": "Unlimited keys",
+          "team": "Team collaboration (5 members)",
+          "autoSync": "Auto GitHub sync",
+          "support": "Priority support"
+        },
+        "cta": "Get Started"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "99€",
+        "period": "/month",
+        "features": {
+          "all": "Everything in Pro",
+          "members": "Unlimited members",
+          "roles": "Roles and permissions management",
+          "api": "Dedicated API",
+          "sla": "99.9% guaranteed SLA",
+          "support": "24/7 dedicated support"
+        },
+        "cta": "Contact us"
+      },
+      "trial": "All plans include a 14-day trial with no commitment."
+    },
+    "cta": {
+      "title": "Ready to simplify your translations?",
+      "subtitle": "Start for free today with your GitHub account",
+      "getStarted": "Get Started",
+      "demo": "Demo"
+    },
+    "faq": {
+      "title": "FAQ",
+      "q1": {
+        "question": "What translation formats are supported?",
+        "answer": "LocalKit supports all standard i18next formats: JSON, YAML and ZIP files containing multiple locales. Import and export are bidirectional for maximum flexibility."
+      },
+      "q2": {
+        "question": "How does the GitHub integration work?",
+        "answer": "Once connected with GitHub, you can automatically sync your translations with your repository. LocalKit can create automatic Pull Requests when modifications are made."
+      },
+      "q3": {
+        "question": "Is it free to use?",
+        "answer": "Yes! LocalKit offers a generous free plan to discover the tool. Paid plans are available for teams requiring more features."
+      },
+      "q4": {
+        "question": "Can I collaborate with my team?",
+        "answer": "Absolutely! LocalKit is designed for team collaboration. Share your projects and work together on your translations in real time."
+      },
+      "q5": {
+        "question": "Is there a project limit?",
+        "answer": "The free plan allows 1 project with up to 5 locales and 1000 keys. Paid plans offer unlimited projects and locales."
+      }
+    },
+    "footer": {
+      "product": {
+        "title": "Product",
+        "features": "Features",
+        "pricing": "Pricing",
+        "documentation": "Documentation",
+        "changelog": "Changelog"
+      },
+      "company": {
+        "title": "Company",
+        "about": "About",
+        "blog": "Blog",
+        "careers": "Careers",
+        "contact": "Contact"
+      },
+      "resources": {
+        "title": "Resources",
+        "support": "Support",
+        "guides": "Guides",
+        "api": "API",
+        "status": "Status"
+      },
+      "legal": {
+        "copyright": "© 2026 LocalKit. All rights reserved.",
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "cookies": "Cookies"
+      }
+    }
+  },
+  "loading": "Loading..."
+}
