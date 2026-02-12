@@ -7,9 +7,6 @@
       "schedule": "0 2 * * *"
     }
   ],
-  "env": {
-    "NEXT_PUBLIC_APP_URL": "@next-public-app-url"
-  },
   "headers": [
     {
       "source": "/(.*)",

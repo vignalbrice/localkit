@@ -57,7 +57,7 @@ AUTH_ADMIN_PASSWORD="votre-mot-de-passe-securise"
 
 ## 📝 Comment Ajouter sur Vercel
 
-### Méthode 1 : Interface Web
+### Méthode 1 : Interface Web (Recommandée)
 
 1. Allez sur [Vercel Dashboard](https://vercel.com/dashboard)
 2. Sélectionnez votre projet
@@ -67,6 +67,15 @@ AUTH_ADMIN_PASSWORD="votre-mot-de-passe-securise"
    - **Key** : Nom de la variable (ex: `AUTH_SECRET`)
    - **Value** : Valeur de la variable
    - **Environment** : Sélectionnez Production, Preview, Development selon vos besoins
+
+**Variables à ajouter obligatoirement :**
+- `AUTH_SECRET` → Générez avec `openssl rand -base64 32`
+- `AUTH_GITHUB_ID` → Depuis votre GitHub OAuth App
+- `AUTH_GITHUB_SECRET` → Depuis votre GitHub OAuth App
+- `AUTH_URL` → URL de votre app Vercel (ex: `https://localkit.vercel.app`) **SANS slash final**
+- `NEXTAUTH_URL` → Même URL que AUTH_URL **SANS slash final**
+- `NEXT_PUBLIC_APP_URL` → Même URL que AUTH_URL **SANS slash final**
+- `DATABASE_URL` → URL de connexion Supabase PostgreSQL
 
 ### Méthode 2 : CLI Vercel
 
@@ -78,23 +87,10 @@ vercel env add AUTH_SECRET production
 vercel env pull .env.vercel.local
 ```
 
-### Méthode 3 : Fichier vercel.json (Variables Publiques Uniquement)
+### ⚠️ Note sur vercel.json
 
-Pour les variables publiques (`NEXT_PUBLIC_*`), vous pouvez les déclarer dans `vercel.json` :
-
-```json
-{
-  "env": {
-    "NEXT_PUBLIC_APP_URL": "@next-public-app-url"
-  }
-}
-```
-
-Puis créer le secret :
-
-```bash
-vercel secrets add next-public-app-url "https://votre-app.vercel.app"
-```
+Le fichier `vercel.json` ne contient plus de référence aux variables d'environnement.
+Toutes les variables doivent être configurées directement dans Vercel Dashboard.
 
 ## 🎯 Configuration par Environnement
 
