@@ -2,6 +2,9 @@ import SettingsClient from "./SettingsClient";
 import { getGithubStatus, getTeamMembers } from "./actions";
 import { getCurrentUser } from "@/utils/getCurrentUser";
 
+// Force dynamic rendering since we use auth() which calls headers()
+export const dynamic = "force-dynamic";
+
 export default async function SettingsPage() {
   // Récupérer les données GitHub côté serveur
   const githubStatus = await getGithubStatus();
