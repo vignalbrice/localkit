@@ -1,0 +1,32 @@
+# Fichiers locaux à ignorer lors du déploiement Vercel
+.env.local
+.env*.local
+
+# Node modules (installés par Vercel)
+node_modules/
+
+# Fichiers de développement
+*.log
+.DS_Store
+.vscode/
+.idea/
+
+# Tests
+__tests__/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Documentation locale
+README.md
+CHECKLIST.md
+DEPLOYMENT.md
+examples/
+
+# Git
+.git/
+.gitignore
+
+# Drizzle (les migrations sont exécutées séparément)
+drizzle/scripts/

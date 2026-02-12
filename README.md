@@ -251,30 +251,100 @@ pnpm build
 
 ## 🚢 Déploiement
 
-### Vercel (Recommandé)
+### Déploiement rapide sur Vercel
 
-1. Connectez votre repo GitHub à Vercel
-2. Configurez les variables d'environnement :
-   - `AUTH_SECRET`
-   - `AUTH_GITHUB_ID`
-   - `AUTH_GITHUB_SECRET`
-   - `DATABASE_URL` (Vercel Postgres)
-3. Déployez !
+**Option 1 : Interface Web Vercel**
 
-### Variables d'environnement production
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vignalbrice/localkit)
+
+1. Cliquez sur le bouton ci-dessus
+2. Connectez votre compte GitHub
+3. Configurez les variables d'environnement (voir ci-dessous)
+4. Déployez !
+
+**Option 2 : CLI (Recommandé)**
+
+```bash
+# Installer Vercel CLI
+pnpm add -g vercel
+
+# Utiliser le script de déploiement
+./deploy-vercel.sh
+```
+
+### Configuration Vercel
+
+Consultez le guide complet : **[DEPLOYMENT.md](./DEPLOYMENT.md)**
+
+#### Variables d'environnement requises
 
 ```env
+# Auth (NextAuth v5)
 AUTH_SECRET=your-production-secret
 AUTH_GITHUB_ID=your-github-client-id
 AUTH_GITHUB_SECRET=your-github-client-secret
-DATABASE_URL=postgresql://user:pass@host:5432/db
+
+# URLs Production (SANS slash final !)
+AUTH_URL=https://votre-app.vercel.app
+NEXTAUTH_URL=https://votre-app.vercel.app
+NEXT_PUBLIC_APP_URL=https://votre-app.vercel.app
+
+# Database Supabase
+DATABASE_URL=postgresql://user:pass@host.supabase.co:5432/postgres
+
+# GitHub App (optionnel)
+GITHUB_APP_ID=123456
+GITHUB_APP_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----
+GITHUB_APP_SLUG=your-app-slug
 ```
 
-**Important :** Mettez à jour l'URL de callback GitHub pour la production :
+#### Points importants
 
+⚠️ **Avant le déploiement** :
+
+1. **Mettez à jour GitHub OAuth** :
+   - Homepage URL : `https://votre-app.vercel.app`
+   - Callback URL : `https://votre-app.vercel.app/api/auth/callback/github`
+
+2. **Exécutez les migrations DB** sur Supabase :
+
+   ```bash
+   pnpm db:push
+   ```
+
+   Ou via SQL Editor dans Supabase Dashboard
+
+3. **Cron Jobs** (Auto-sync) nécessitent un plan Vercel **Pro** ou supérieur
+
+### Autres plateformes
+
+<details>
+<summary>Docker</summary>
+
+```bash
+# Build l'image
+docker build -t localkit .
+
+# Run le container
+docker run -p 3000:3000 --env-file .env.local localkit
 ```
-https://votre-domaine.com/api/auth/callback/github
+
+</details>
+
+<details>
+<summary>VPS / Serveur personnel</summary>
+
+```bash
+# Build production
+pnpm build
+
+# Start server
+pnpm start
 ```
+
+Utilisez PM2 ou systemd pour gérer le process en production.
+
+</details>
 
 ## 🤝 Contribution
 

@@ -1,8 +1,49 @@
 {
+  "buildCommand": "pnpm build",
+  "installCommand": "pnpm install",
   "crons": [
     {
       "path": "/api/auto-sync",
       "schedule": "0 2 * * *"
+    }
+  ],
+  "env": {
+    "NEXT_PUBLIC_APP_URL": "@next-public-app-url"
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/dashboard",
+      "permanent": false,
+      "has": [
+        {
+          "type": "cookie",
+          "key": "authjs.session-token"
+        }
+      ]
     }
   ]
 }

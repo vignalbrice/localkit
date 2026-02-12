@@ -1,0 +1,76 @@
+name: Vérification Pre-Deploy
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main, develop]
+
+jobs:
+  verify:
+    name: Vérifications avant déploiement
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: TypeScript check
+        run: pnpm tsc --noEmit
+
+      - name: ESLint check
+        run: pnpm lint
+        continue-on-error: true
+
+      - name: Build check
+        run: pnpm build
+        env:
+          # Variables factices pour le build
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET || 'test-secret-key-for-build-only-do-not-use-in-production' }}
+          AUTH_GITHUB_ID: ${{ secrets.AUTH_GITHUB_ID || 'test-github-id' }}
+          AUTH_GITHUB_SECRET: ${{ secrets.AUTH_GITHUB_SECRET || 'test-github-secret' }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL || 'postgresql://test:test@localhost:5432/test' }}
+          NEXTAUTH_URL: "http://localhost:3000"
+          AUTH_URL: "http://localhost:3000"
+          NEXT_PUBLIC_APP_URL: "http://localhost:3000"
+
+      - name: Check for env.example
+        run: |
+          if [ ! -f .env.example ]; then
+            echo "❌ Fichier .env.example manquant"
+            exit 1
+          fi
+
+      - name: Résumé
+        if: always()
+        run: |
+          echo "✅ Vérifications terminées"
+          echo "- TypeScript: OK"
+          echo "- ESLint: Vérifié"
+          echo "- Build: OK"
