@@ -11,66 +11,85 @@ import { users } from "@/lib/db/schema";
 // Minimal auth: users sign in with GitHub.
 // In production, add a DB adapter (Drizzle/Prisma) for persisted users/teams.
 // For V2 starter, session is enough; projects are owned by session user id.
-export const { handlers, auth, signIn, signOut } = NextAuth({
-  providers: [
+
+// Build providers array conditionally based on available env vars
+const providers = [];
+
+// GitHub provider (required)
+if (process.env.AUTH_GITHUB_ID && process.env.AUTH_GITHUB_SECRET) {
+  providers.push(
     GitHub({
-      clientId: process.env.AUTH_GITHUB_ID!,
-      clientSecret: process.env.AUTH_GITHUB_SECRET!,
-    }),
-    Google({
-      clientId: process.env.AUTH_GOOGLE_ID!,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
-    }),
-    Credentials({
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Mot de passe", type: "password" },
-      },
-      async authorize(credentials) {
-        const email = credentials?.email?.toString().trim();
-        const password = credentials?.password?.toString();
-
-        if (!email || !password) {
-          return null;
-        }
-
-        const adminEmail = process.env.AUTH_ADMIN_EMAIL;
-        const adminPassword = process.env.AUTH_ADMIN_PASSWORD;
-
-        if (adminEmail && adminPassword && email === adminEmail && password === adminPassword) {
-          return {
-            id: "admin",
-            name: "Admin",
-            email,
-          };
-        }
-
-        const [user] = await db
-          .select()
-          .from(users)
-          .where(eq(users.email, email))
-          .limit(1);
-
-        if (!user?.passwordHash) {
-          return null;
-        }
-
-        const isValid = await compare(password, user.passwordHash);
-
-        if (!isValid) {
-          return null;
-        }
-
-        return {
-          id: user.id,
-          name: user.name ?? user.email ?? "Utilisateur",
-          email: user.email ?? email,
-          image: user.image ?? undefined
-        };
-      },
+      clientId: process.env.AUTH_GITHUB_ID,
+      clientSecret: process.env.AUTH_GITHUB_SECRET,
     })
-  ],
+  );
+}
+
+// Google provider (optional)
+if (process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET) {
+  providers.push(
+    Google({
+      clientId: process.env.AUTH_GOOGLE_ID,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET,
+    })
+  );
+}
+
+// Credentials provider (always available)
+providers.push(
+  Credentials({
+    name: "Credentials",
+    credentials: {
+      email: { label: "Email", type: "email" },
+      password: { label: "Mot de passe", type: "password" },
+    },
+    async authorize(credentials) {
+      const email = credentials?.email?.toString().trim();
+      const password = credentials?.password?.toString();
+
+      if (!email || !password) {
+        return null;
+      }
+
+      const adminEmail = process.env.AUTH_ADMIN_EMAIL;
+      const adminPassword = process.env.AUTH_ADMIN_PASSWORD;
+
+      if (adminEmail && adminPassword && email === adminEmail && password === adminPassword) {
+        return {
+          id: "admin",
+          name: "Admin",
+          email,
+        };
+      }
+
+      const [user] = await db
+        .select()
+        .from(users)
+        .where(eq(users.email, email))
+        .limit(1);
+
+      if (!user?.passwordHash) {
+        return null;
+      }
+
+      const isValid = await compare(password, user.passwordHash);
+
+      if (!isValid) {
+        return null;
+      }
+
+      return {
+        id: user.id,
+        name: user.name ?? user.email ?? "Utilisateur",
+        email: user.email ?? email,
+        image: user.image ?? undefined
+      };
+    },
+  })
+);
+
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  providers,
   callbacks: {
     async jwt({ token, account }) {
       // Stocker le token GitHub dans le JWT
