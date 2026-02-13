@@ -5,7 +5,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { signupUser } from "./actions";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function Signup() {
   const t = useTranslations("signup");
