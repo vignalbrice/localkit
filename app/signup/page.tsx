@@ -26,8 +26,11 @@ export default function Signup() {
         return;
       }
       router.push("/dashboard");
-    } catch {
-      toast.error("Signup failed");
+    } catch (e) {
+      toast.error(
+        "Signup failed",
+        e instanceof Error ? { description: e.message } : undefined,
+      );
       setIsLoading(false);
     }
   };
