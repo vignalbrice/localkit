@@ -5,10 +5,12 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { signupUser } from "./actions";
+import { useRouter } from "next/router";
 
 export default function Signup() {
   const t = useTranslations("signup");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,11 +19,15 @@ export default function Signup() {
     const formData = new FormData(e.currentTarget);
 
     try {
-      await signupUser(formData);
-      // Redirect is handled by the server action
-    } catch (error) {
-      console.error("Signup error:", error);
-      toast.error(error instanceof Error ? error.message : "Signup failed");
+      const res = await signupUser(formData);
+      if (!res.ok) {
+        toast.error(res.message ?? "Signup failed");
+        setIsLoading(false);
+        return;
+      }
+      router.push("/dashboard");
+    } catch {
+      toast.error("Signup failed");
       setIsLoading(false);
     }
   };
