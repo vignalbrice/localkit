@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import TranslationCell from "./TranslationCell";
 import {
   Dialog,
   DialogContent,
@@ -28,6 +29,7 @@ import {
   CheckCircle2,
   Search,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface TranslationKey {
   namespace: string;
@@ -83,6 +85,8 @@ export default function ProjectEditor({
   onUpdateEntry,
   onAddLanguageOpenChange,
 }: ProjectEditorProps) {
+  const t = useTranslations("projectEditor");
+
   return (
     <div className="flex-1">
       <Card>
@@ -92,7 +96,7 @@ export default function ProjectEditor({
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
               <Input
-                placeholder="Rechercher..."
+                placeholder={t("searchPlaceholder")}
                 value={searchQuery}
                 onChange={(e) => onSearchQueryChange(e.target.value)}
                 className="pl-9"
@@ -106,26 +110,26 @@ export default function ProjectEditor({
                   className="w-full sm:w-auto"
                 >
                   <Plus className="size-4 mr-2" />
-                  <span className="sm:inline">Ajouter une clé</span>
+                  <span className="sm:inline">{t("addKey")}</span>
                 </Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Ajouter une clé de traduction</DialogTitle>
+                  <DialogTitle>{t("addKeyDialogTitle")}</DialogTitle>
                   <DialogDescription>
-                    Créer une nouvelle clé pour toutes les langues
+                    {t("addKeyDialogDescription")}
                   </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-4 py-4">
                   <div className="space-y-2">
-                    <Label>Namespace</Label>
+                    <Label>{t("namespaceLabel")}</Label>
                     {namespaces.length > 0 ? (
                       <Select
                         value={newKeyNamespace}
                         onValueChange={onNewKeyNamespaceChange}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="Sélectionner un namespace" />
+                          <SelectValue placeholder={t("selectNamespace")} />
                         </SelectTrigger>
                         <SelectContent>
                           {namespaces.map((ns) => (
@@ -134,7 +138,7 @@ export default function ProjectEditor({
                             </SelectItem>
                           ))}
                           <SelectItem value="__new__">
-                            + Créer un nouveau namespace
+                            {t("createNewNamespace")}
                           </SelectItem>
                         </SelectContent>
                       </Select>
@@ -149,7 +153,7 @@ export default function ProjectEditor({
                     )}
                     {newKeyNamespace === "__new__" && (
                       <Input
-                        placeholder="Nom du nouveau namespace"
+                        placeholder={t("newNamespacePlaceholder")}
                         onChange={(e) =>
                           onNewKeyNamespaceChange(e.target.value)
                         }
@@ -158,20 +162,20 @@ export default function ProjectEditor({
                     )}
                     <p className="text-xs text-slate-500">
                       {namespaces.length === 0
-                        ? "Le namespace 'common' sera utilisé par défaut si vide"
-                        : "Ou laissez vide pour utiliser 'common'"}
+                        ? t("namespaceHelp")
+                        : t("namespaceHelpExisting")}
                     </p>
                   </div>
                   <div className="space-y-2">
-                    <Label>Clé (notation point)</Label>
+                    <Label>{t("keyLabel")}</Label>
                     <Input
-                      placeholder="ex: auth.login.title"
+                      placeholder={t("keyPlaceholder")}
                       value={newKeyDotKey}
                       onChange={(e) => onNewKeyDotKeyChange(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && onAddKey()}
                     />
                     <p className="text-xs text-slate-500">
-                      La clé sera créée vide pour les {locales.length} langue(s)
+                      {t("keyHelp", { count: locales.length })}
                     </p>
                   </div>
                 </div>
@@ -180,9 +184,9 @@ export default function ProjectEditor({
                     variant="outline"
                     onClick={() => onAddKeyOpenChange(false)}
                   >
-                    Annuler
+                    {t("cancel")}
                   </Button>
-                  <Button onClick={onAddKey}>Ajouter</Button>
+                  <Button onClick={onAddKey}>{t("add")}</Button>
                 </div>
               </DialogContent>
             </Dialog>
@@ -193,7 +197,7 @@ export default function ProjectEditor({
             <div className="text-center py-8 sm:py-12 px-4">
               <AlertCircle className="size-10 sm:size-12 text-slate-300 mx-auto mb-3 sm:mb-4" />
               <p className="text-sm sm:text-base text-slate-600 mb-3 sm:mb-2">
-                Ajoutez des langues pour commencer à éditer les traductions
+                {t("noLanguagesTitle")}
               </p>
               <Button
                 variant="outline"
@@ -201,15 +205,14 @@ export default function ProjectEditor({
                 className="w-full sm:w-auto"
               >
                 <Plus className="size-4 mr-2" />
-                Ajouter une langue
+                {t("addLanguageButton")}
               </Button>
             </div>
           ) : filteredKeys.length === 0 && translationKeys.length === 0 ? (
             <div className="text-center py-8 sm:py-12 px-4">
               <AlertCircle className="size-10 sm:size-12 text-slate-300 mx-auto mb-3 sm:mb-4" />
               <p className="text-sm sm:text-base text-slate-600 mb-3 sm:mb-2">
-                Aucune clé de traduction. Ajoutez votre première clé pour
-                commencer.
+                {t("noKeysTitle")}
               </p>
               <Button
                 variant="outline"
@@ -217,7 +220,7 @@ export default function ProjectEditor({
                 className="w-full sm:w-auto"
               >
                 <Plus className="size-4 mr-2" />
-                Ajouter une clé
+                {t("addKey")}
               </Button>
             </div>
           ) : (
@@ -227,11 +230,11 @@ export default function ProjectEditor({
                   <thead className="bg-slate-50 border-b">
                     <tr>
                       <th className="text-left px-2 sm:px-4 py-2 sm:py-3 font-semibold text-xs sm:text-sm sticky left-0 bg-slate-50 z-10 min-w-30 sm:min-w-50">
-                        Clé
+                        {t("tableHeaderKey")}
                       </th>
                       {selectedNamespace === "all" && (
                         <th className="text-left px-2 sm:px-4 py-2 sm:py-3 font-semibold text-xs sm:text-sm min-w-20 sm:min-w-30">
-                          Namespace
+                          {t("tableHeaderNamespace")}
                         </th>
                       )}
                       {locales.map((lang) => (
@@ -243,7 +246,7 @@ export default function ProjectEditor({
                         </th>
                       ))}
                       <th className="text-center px-2 sm:px-4 py-2 sm:py-3 font-semibold text-xs sm:text-sm min-w-15 sm:min-w-25">
-                        Statut
+                        {t("tableHeaderStatus")}
                       </th>
                     </tr>
                   </thead>
@@ -257,7 +260,7 @@ export default function ProjectEditor({
                           }
                           className="text-center py-6 sm:py-8 text-sm text-slate-500"
                         >
-                          Aucune clé trouvée
+                          {t("noKeysFound")}
                         </td>
                       </tr>
                     ) : (
@@ -299,32 +302,15 @@ export default function ProjectEditor({
                                 key={lang}
                                 className="px-2 sm:px-4 py-2 sm:py-3"
                               >
-                                <div className="relative">
-                                  <Input
-                                    value={tk.translations[lang] || ""}
-                                    onChange={(e) =>
-                                      onUpdateEntry(
-                                        lang,
-                                        tk.namespace,
-                                        tk.dotKey,
-                                        e.target.value,
-                                      )
-                                    }
-                                    placeholder={hasMissing ? "Manquante" : ""}
-                                    className={`text-xs sm:text-sm ${
-                                      hasMissing
-                                        ? "border-amber-300 bg-amber-50"
-                                        : hasPlaceholderIssue
-                                          ? "border-red-300 bg-red-50"
-                                          : ""
-                                    }`}
-                                  />
-                                  {hasPlaceholderIssue && (
-                                    <div className="absolute -top-1 -right-1">
-                                      <AlertTriangle className="size-3 sm:size-4 text-red-600" />
-                                    </div>
-                                  )}
-                                </div>
+                                <TranslationCell
+                                  locale={lang}
+                                  namespace={tk.namespace}
+                                  dotKey={tk.dotKey}
+                                  value={tk.translations[lang] || ""}
+                                  hasMissing={hasMissing}
+                                  hasPlaceholderIssue={!!hasPlaceholderIssue}
+                                  onSave={onUpdateEntry}
+                                />
                               </td>
                             );
                           })}

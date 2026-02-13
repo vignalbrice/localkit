@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useSession, signIn } from "next-auth/react";
 import type { Entry, Project, GitHubConnection } from "./types";
@@ -44,6 +44,11 @@ export function ProjectClient({
   const [githubConnection, setGithubConnection] =
     useState<GitHubConnection | null>(initialGithubConnection);
 
+  // Synchroniser l'état local avec les props quand elles changent (après router.refresh())
+  useEffect(() => {
+    setEntries(initialEntries);
+  }, [initialEntries]);
+
   const [isAddLanguageOpen, setIsAddLanguageOpen] = useState(false);
   const [isAddNamespaceOpen, setIsAddNamespaceOpen] = useState(false);
   const [isAddKeyOpen, setIsAddKeyOpen] = useState(false);
@@ -56,9 +61,6 @@ export function ProjectClient({
   const [searchQuery, setSearchQuery] = useState("");
   const [isGithubDialogOpen, setIsGithubDialogOpen] = useState(false);
   const [isPushDialogOpen, setIsPushDialogOpen] = useState(false);
-
-  // Debounce timer pour les mises à jour
-  const updateTimers = useRef<Map<string, NodeJS.Timeout>>(new Map());
 
   // Afficher un message si l'utilisateur revient après OAuth
   useEffect(() => {
@@ -98,7 +100,28 @@ export function ProjectClient({
     dotKey: string,
     value: string,
   ) {
-    // Mise à jour immédiate de l'état local
+    // Vérifier si l'entrée existe (pas temporaire)
+    const entry = entries.find(
+      (e) =>
+        e.locale === locale && e.namespace === namespace && e.dotKey === dotKey,
+    );
+
+    // Si l'entrée est temporaire, ne pas sauvegarder en BDD
+    if (entry?.id.startsWith("temp-")) {
+      // Mise à jour de l'état global pour les entrées temporaires
+      setEntries((prevEntries) =>
+        prevEntries.map((entry) =>
+          entry.locale === locale &&
+          entry.namespace === namespace &&
+          entry.dotKey === dotKey
+            ? { ...entry, value }
+            : entry,
+        ),
+      );
+      return;
+    }
+
+    // Mise à jour de l'état global
     setEntries((prevEntries) =>
       prevEntries.map((entry) =>
         entry.locale === locale &&
@@ -109,35 +132,26 @@ export function ProjectClient({
       ),
     );
 
-    // Debounce de l'appel API (500ms)
-    const key = `${locale}-${namespace}-${dotKey}`;
-    const timers = updateTimers.current;
+    // Sauvegarde immédiate (appelé uniquement sur blur/Enter depuis TranslationCell)
+    try {
+      const result = await updateEntry(
+        project.id,
+        locale,
+        namespace,
+        dotKey,
+        value,
+      );
 
-    if (timers.has(key)) {
-      clearTimeout(timers.get(key)!);
-    }
-
-    const timer = setTimeout(async () => {
-      try {
-        const result = await updateEntry(
-          project.id,
-          locale,
-          namespace,
-          dotKey,
-          value,
-        );
-        if (result.error) {
-          toast.error(result.error);
-          router.refresh();
-        }
-        timers.delete(key);
-      } catch {
-        toast.error(t("projects.errorSaving"));
+      if (result.error) {
+        toast.error(result.error);
+        // Rafraîchir pour restaurer la valeur correcte
         router.refresh();
       }
-    }, 500);
-
-    timers.set(key, timer);
+    } catch {
+      toast.error(t("projects.errorSaving"));
+      // Rafraîchir pour restaurer la valeur correcte
+      router.refresh();
+    }
   }
 
   const handleAddLanguage = async () => {
@@ -148,37 +162,57 @@ export function ProjectClient({
       return;
     }
 
-    // Mise à jour optimiste : créer les nouvelles entrées pour toutes les clés existantes
-    const existingKeys = Array.from(
-      new Set(entries.map((e) => `${e.namespace}:${e.dotKey}`)),
-    );
+    const isFirstLanguage = locales.length === 0;
+    const previousEntries = entries;
 
-    const newEntries: Entry[] = existingKeys.map((key) => {
-      const [namespace, dotKey] = key.split(":");
-      return {
-        id: `temp-${Date.now()}-${namespace}-${dotKey}`,
+    // Générer un ID unique pour les entrées temporaires
+    const generateTempId = () =>
+      `temp-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
+    // Mise à jour optimiste : créer les nouvelles entrées pour cette langue
+    if (!isFirstLanguage) {
+      const uniqueKeys = new Set(
+        entries.map((e) => `${e.namespace}:${e.dotKey}`),
+      );
+      const newEntries: Entry[] = Array.from(uniqueKeys).map((key) => {
+        const [namespace, dotKey] = key.split(":");
+        return {
+          id: generateTempId(),
+          projectId: project.id,
+          locale: newLanguage,
+          namespace,
+          dotKey,
+          value: "",
+          placeholders: [],
+          updatedAt: new Date(),
+        };
+      });
+      setEntries([...entries, ...newEntries]);
+    } else {
+      // Première langue : ajouter l'entrée placeholder
+      const newEntry: Entry = {
+        id: generateTempId(),
         projectId: project.id,
         locale: newLanguage,
-        namespace,
-        dotKey,
+        namespace: "common",
+        dotKey: "placeholder",
         value: "",
         placeholders: [],
         updatedAt: new Date(),
       };
-    });
+      setEntries([newEntry]);
+    }
 
-    setEntries((prev) => [...prev, ...newEntries]);
+    setNewLanguage("");
+    setIsAddLanguageOpen(false);
 
     const result = await addLocale(project.id, newLanguage);
 
     if (result.error) {
-      // En cas d'erreur, annuler la mise à jour optimiste
-      setEntries((prev) => prev.filter((e) => !e.id.startsWith("temp-")));
       toast.error(result.error);
+      setEntries(previousEntries); // Rollback en cas d'erreur
       return;
     }
-
-    const isFirstLanguage = locales.length === 0;
 
     if (isFirstLanguage) {
       toast.success(
@@ -193,26 +227,32 @@ export function ProjectClient({
       );
     }
 
-    setNewLanguage("");
-    setIsAddLanguageOpen(false);
-
-    // Rafraîchir pour obtenir les vrais IDs de la base de données
+    // Rafraîchir le Server Component pour obtenir les vraies données
     router.refresh();
   };
 
   const handleAddNamespace = async () => {
     if (!newNamespace.trim()) return;
 
+    // Si aucune locale n'existe encore, demander d'abord d'ajouter une langue
+    if (locales.length === 0) {
+      toast.error(t("projects.addLocaleFirst"));
+      return;
+    }
+
     if (namespaces.includes(newNamespace)) {
       toast.error(t("projects.namespaceExists"));
       return;
     }
 
-    // Un namespace est créé en ajoutant une clé de démonstration
-    // Mise à jour optimiste : ajouter une clé par défaut dans ce namespace
+    const previousEntries = entries;
+    const generateTempId = () =>
+      `temp-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
+    // Mise à jour optimiste : créer le namespace avec une clé placeholder
     const defaultKey = "placeholder";
     const newEntries: Entry[] = locales.map((locale) => ({
-      id: `temp-${Date.now()}-${locale}`,
+      id: generateTempId(),
       projectId: project.id,
       locale,
       namespace: newNamespace,
@@ -221,25 +261,24 @@ export function ProjectClient({
       placeholders: [],
       updatedAt: new Date(),
     }));
+    setEntries([...entries, ...newEntries]);
 
-    setEntries((prev) => [...prev, ...newEntries]);
+    setNewNamespace("");
+    setIsAddNamespaceOpen(false);
+    setSelectedNamespace(newNamespace);
 
     // Créer le namespace en ajoutant une clé par défaut
     const result = await addKey(project.id, newNamespace, defaultKey, locales);
 
     if (result.error) {
-      // En cas d'erreur, annuler la mise à jour optimiste
-      setEntries((prev) => prev.filter((e) => !e.id.startsWith("temp-")));
       toast.error(result.error);
+      setEntries(previousEntries); // Rollback en cas d'erreur
       return;
     }
 
     toast.success(t("projects.namespaceAdded", { namespace: newNamespace }));
-    setNewNamespace("");
-    setIsAddNamespaceOpen(false);
-    setSelectedNamespace(newNamespace);
 
-    // Rafraîchir pour obtenir les vrais IDs
+    // Rafraîchir le Server Component pour obtenir les vraies données
     router.refresh();
   };
 
@@ -251,9 +290,13 @@ export function ProjectClient({
       return;
     }
 
-    // Mise à jour optimiste : ajouter immédiatement les nouvelles entrées dans l'état local
+    const previousEntries = entries;
+    const generateTempId = () =>
+      `temp-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
+    // Mise à jour optimiste : créer les nouvelles entrées pour cette clé dans toutes les langues
     const newEntries: Entry[] = locales.map((locale) => ({
-      id: `temp-${Date.now()}-${locale}`,
+      id: generateTempId(),
       projectId: project.id,
       locale,
       namespace: finalNamespace,
@@ -262,8 +305,11 @@ export function ProjectClient({
       placeholders: [],
       updatedAt: new Date(),
     }));
+    setEntries([...entries, ...newEntries]);
 
-    setEntries((prev) => [...prev, ...newEntries]);
+    setNewKeyNamespace("");
+    setNewKeyDotKey("");
+    setIsAddKeyOpen(false);
 
     const result = await addKey(
       project.id,
@@ -273,9 +319,8 @@ export function ProjectClient({
     );
 
     if (result.error) {
-      // En cas d'erreur, annuler la mise à jour optimiste
-      setEntries((prev) => prev.filter((e) => !e.id.startsWith("temp-")));
       toast.error(result.error);
+      setEntries(previousEntries); // Rollback en cas d'erreur
       return;
     }
 
@@ -285,11 +330,8 @@ export function ProjectClient({
         namespace: finalNamespace,
       }),
     );
-    setNewKeyNamespace("");
-    setNewKeyDotKey("");
-    setIsAddKeyOpen(false);
 
-    // Rafraîchir pour obtenir les vrais IDs de la base de données
+    // Rafraîchir le Server Component pour obtenir les vraies données
     router.refresh();
   };
 
@@ -306,22 +348,27 @@ export function ProjectClient({
     if (!confirm(t("projects.deleteKeyConfirm", { key: dotKey, namespace })))
       return;
 
-    // Mise à jour optimiste : supprimer immédiatement les entrées de l'état local
     const previousEntries = entries;
-    setEntries((prev) =>
-      prev.filter((e) => !(e.namespace === namespace && e.dotKey === dotKey)),
+
+    // Mise à jour optimiste : supprimer les entrées correspondant à cette clé
+    setEntries(
+      entries.filter(
+        (entry) => !(entry.namespace === namespace && entry.dotKey === dotKey),
+      ),
     );
 
     const result = await deleteKey(project.id, namespace, dotKey);
 
     if (result.error) {
-      // En cas d'erreur, restaurer les entrées
-      setEntries(previousEntries);
       toast.error(result.error);
+      setEntries(previousEntries); // Rollback en cas d'erreur
       return;
     }
 
     toast.success(t("projects.keyDeleted", { key: dotKey }));
+
+    // Rafraîchir le Server Component pour obtenir les vraies données
+    router.refresh();
   };
 
   const handleConnectGithub = async (repository: string, branch: string) => {

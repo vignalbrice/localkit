@@ -113,6 +113,30 @@
       "autoSyncDescription": "Translation changes are automatically synced with GitHub every 30 minutes for all team members."
     }
   },
+  "projectEditor": {
+    "searchPlaceholder": "Search...",
+    "addKey": "Add a key",
+    "addKeyDialogTitle": "Add a translation key",
+    "addKeyDialogDescription": "Create a new key for all languages",
+    "namespaceLabel": "Namespace",
+    "selectNamespace": "Select a namespace",
+    "createNewNamespace": "+ Create a new namespace",
+    "newNamespacePlaceholder": "New namespace name",
+    "namespaceHelp": "The 'common' namespace will be used by default if empty",
+    "namespaceHelpExisting": "Or leave empty to use 'common'",
+    "keyLabel": "Key (dot notation)",
+    "keyPlaceholder": "e.g.: auth.login.title",
+    "keyHelp": "The key will be created empty for the {count} language(s)",
+    "cancel": "Cancel",
+    "add": "Add",
+    "noLanguagesTitle": "Add languages to start editing translations",
+    "addLanguageButton": "Add a language",
+    "noKeysTitle": "No translation keys. Add your first key to get started.",
+    "noKeysFound": "No keys found",
+    "tableHeaderKey": "Key",
+    "tableHeaderNamespace": "Namespace",
+    "tableHeaderStatus": "Status"
+  },
   "projects": {
     "title": "Projects",
     "subtitle": "Manage your translation projects",
@@ -149,6 +173,7 @@
     "keyPlaceholder": "e.g.: auth.login.title",
     "keyWillBeCreated": "The key will be created empty for the {count} language(s)",
     "addLanguagesToStart": "Add languages to start editing translations",
+    "addLocaleFirst": "Add a language first before creating a namespace",
     "noKeys": "No translation keys. Add your first key to get started.",
     "totalKeys": "Total keys",
     "complete": "Complete",

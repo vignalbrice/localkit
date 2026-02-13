@@ -113,6 +113,30 @@
       "autoSyncDescription": "Les modifications de traduction sont automatiquement synchronisées avec GitHub toutes les 30 minutes pour tous les membres de l'équipe."
     }
   },
+  "projectEditor": {
+    "searchPlaceholder": "Rechercher...",
+    "addKey": "Ajouter une clé",
+    "addKeyDialogTitle": "Ajouter une clé de traduction",
+    "addKeyDialogDescription": "Créer une nouvelle clé pour toutes les langues",
+    "namespaceLabel": "Namespace",
+    "selectNamespace": "Sélectionner un namespace",
+    "createNewNamespace": "+ Créer un nouveau namespace",
+    "newNamespacePlaceholder": "Nom du nouveau namespace",
+    "namespaceHelp": "Le namespace 'common' sera utilisé par défaut si vide",
+    "namespaceHelpExisting": "Ou laissez vide pour utiliser 'common'",
+    "keyLabel": "Clé (notation point)",
+    "keyPlaceholder": "ex: auth.login.title",
+    "keyHelp": "La clé sera créée vide pour les {count} langue(s)",
+    "cancel": "Annuler",
+    "add": "Ajouter",
+    "noLanguagesTitle": "Ajoutez des langues pour commencer à éditer les traductions",
+    "addLanguageButton": "Ajouter une langue",
+    "noKeysTitle": "Aucune clé de traduction. Ajoutez votre première clé pour commencer.",
+    "noKeysFound": "Aucune clé trouvée",
+    "tableHeaderKey": "Clé",
+    "tableHeaderNamespace": "Namespace",
+    "tableHeaderStatus": "Statut"
+  },
   "projects": {
     "title": "Projets",
     "subtitle": "Gérez vos projets de traduction",
@@ -149,6 +173,7 @@
     "keyPlaceholder": "ex : auth.login.title",
     "keyWillBeCreated": "La clé sera créée vide pour les {count} langue(s)",
     "addLanguagesToStart": "Ajoutez des langues pour commencer à éditer les traductions",
+    "addLocaleFirst": "Ajoutez d'abord une langue avant de créer un namespace",
     "noKeys": "Aucune clé de traduction. Ajoutez votre première clé pour commencer.",
     "totalKeys": "Clés totales",
     "complete": "Complètes",

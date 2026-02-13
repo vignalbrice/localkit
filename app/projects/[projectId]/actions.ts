@@ -49,6 +49,22 @@ export async function addLocale(projectId: string, locale: string) {
       };
     });
 
+    // Si le projet n'a pas encore de clés (première langue ajoutée),
+    // créer une clé placeholder afin que la nouvelle locale apparaisse
+    if (uniqueKeys.size === 0) {
+      const placeholder = {
+        projectId,
+        locale,
+        namespace: "common",
+        dotKey: "placeholder",
+        value: "",
+      };
+
+      await db.insert(entries).values(placeholder);
+      revalidatePath(`/projects/${projectId}`);
+      return { success: true, created: 1 };
+    }
+
     if (newEntries.length > 0) {
       await db.insert(entries).values(newEntries);
     }

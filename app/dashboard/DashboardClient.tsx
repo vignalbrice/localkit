@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
@@ -55,6 +55,13 @@ export default function DashboardClient({
 }: ProjectsClientProps) {
   const router = useRouter();
   const t = useTranslations();
+  const [projects, setProjects] = useState<Project[]>(initialProjects);
+
+  // Synchroniser avec les props quand elles changent (après revalidation)
+  useEffect(() => {
+    setProjects(initialProjects);
+  }, [initialProjects]);
+
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [newProjectName, setNewProjectName] = useState("");
   const [isCreating, setIsCreating] = useState(false);
@@ -72,7 +79,7 @@ export default function DashboardClient({
     }
 
     // Vérifier les limites du plan
-    if (!canCreateProject(initialProjects.length, userPlan)) {
+    if (!canCreateProject(projects.length, userPlan)) {
       const planLimits = getPlanLimits(userPlan);
       toast.error(
         t("dashboard.planLimitReached", {
@@ -100,11 +107,20 @@ export default function DashboardClient({
   };
 
   const handleDeleteProject = async (projectId: string) => {
+    // Mise à jour optimiste immédiate
+    setProjects((prevProjects) =>
+      prevProjects.filter((p) => p.id !== projectId),
+    );
+
     try {
       await deleteProject(projectId);
       toast.success(t("dashboard.deleteProject") + " ✔");
-      router.refresh();
+      // La Server Action a déjà appelé revalidatePath("/dashboard")
+      // Le Server Component va se revalider et envoyer les nouvelles props
+      // Le useEffect va synchroniser l'état local avec les nouvelles props
     } catch (error) {
+      // En cas d'erreur, restaurer le projet dans la liste
+      setProjects(initialProjects);
       toast.error(
         `${error instanceof Error ? error.message : t("errors.unknown")}`,
       );
@@ -197,7 +213,7 @@ export default function DashboardClient({
             <AlertTitle>{t("dashboard.freePlanBanner")}</AlertTitle>
             <AlertDescription className="flex items-center justify-between flex-wrap gap-4">
               <span>
-                {initialProjects.length}/{getPlanLimits(userPlan).maxProjects}{" "}
+                {projects.length}/{getPlanLimits(userPlan).maxProjects}{" "}
                 projet(s) • Limite: {getPlanLimits(userPlan).maxLanguages}{" "}
                 langues • {getPlanLimits(userPlan).maxKeys} clés
               </span>
@@ -248,7 +264,7 @@ export default function DashboardClient({
 
         <div className="grid lg:grid-cols-[1fr] gap-6">
           <ProjectsGrid
-            projects={initialProjects}
+            projects={projects}
             isImporting={isImporting}
             onImportZip={handleImportZip}
             onOpenJsonImportDialog={() => setIsJsonImportDialogOpen(true)}
