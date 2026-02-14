@@ -308,6 +308,7 @@
   },
   "login": {
     "title": "Login",
+    "backToHome": "Home",
     "email": "Email",
     "emailPlaceholder": "your-email@example.com",
     "password": "Password",
@@ -321,6 +322,7 @@
   "signup": {
     "title": "Sign up",
     "subtitle": "Create your LocalKit account in seconds",
+    "backToHome": "Home",
     "name": "Name",
     "namePlaceholder": "Your name",
     "email": "Email",
